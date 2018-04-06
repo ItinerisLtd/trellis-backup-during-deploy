@@ -1,2 +1,23 @@
 ---
-# tasks file for trellis-backup-during-deploy
+- name: Web root directory exists?
+  stat:
+    path: "{{ deploy_helper.current_path }}"
+  register: initialize_after_current_path
+
+- name: WordPress installed?
+  command: wp core is-installed --skip-plugins --skip-themes --require={{ deploy_helper.shared_path }}/tmp_multisite_constants.php
+  args:
+    chdir: "{{ deploy_helper.current_path }}"
+  register: initialize_after_wp_installed
+  when: initialize_after_current_path.stat.exists
+  changed_when: false
+  failed_when: initialize_after_wp_installed.stderr != ""
+
+- name: Backup WordPress database
+  command: wp db export
+  args:
+    chdir: "{{ deploy_helper.current_path }}"
+  changed_when: false
+  when:
+    - initialize_after_current_path.stat.exists
+    - initialize_after_wp_installed.rc == 0
