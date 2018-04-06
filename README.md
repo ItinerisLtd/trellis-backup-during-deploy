@@ -3,8 +3,21 @@
 [![GitHub tag](https://img.shields.io/github/tag/ItinerisLtd/trellis-backup-during-deploy.svg)](https://github.com/ItinerisLtd/trellis-backup-during-deploy/tags)
 [![license](https://img.shields.io/github/license/ItinerisLtd/trellis-backup-during-deploy.svg)](https://github.com/ItinerisLtd/trellis-backup-during-deploy/blob/master/LICENSE)
 
-
 Backup WordPress database during [Trellis](https://github.com/roots/trellis) deploys.
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Author Information](#author-information)
+- [Feedback](#feedback)
+- [Change log](#change-log)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Requirements
 
@@ -19,7 +32,7 @@ Add this role to `requirements.yml`:
 ```yaml
 # requirements.yml
 - src: git+https://github.com/ItinerisLtd/trellis-backup-during-deploy.git
-  version: master # Check for latest version!
+  version: 0.1.0 # Check for latest version!
 ```
 
 Add this role to the [`deploy_initialize_after` hook](https://roots.io/trellis/docs/deploys/#hooks):
