@@ -47,7 +47,7 @@ deploy_initialize_after:
 
 [Deploy](https://roots.io/trellis/docs/deploys/#example) as usual. No special action needed.
 
-[`$ wp db export`](https://developer.wordpress.org/cli/commands/db/export/) is invoked during deploy. You can find the database dump in `/srv/www/example.com/releases/2018XXXXXXXXXX/example_com_production-2018-XX-XX-XXXXXXX.sql`
+[`$ wp db export`](https://developer.wordpress.org/cli/commands/db/export/) is invoked during deploy. You can find the database dump in `/srv/www/example.com/releases/2018XXXXXXXXXX/example_com_env-2018-XX-XX-XXXXXXX.sql` – be sure to check the pre-latest `release`-folder (e.g. the release before deploy) since `current` serves as alias to the latest release.
 
 ## Author Information
 
