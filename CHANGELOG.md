@@ -1,8 +1,18 @@
 # Change Log
 
-## [0.1.0](https://github.com/ItinerisLtd/trellis-backup-during-deploy/tree/0.1.0) (2018-04-07)
+## [0.1.1](https://github.com/ItinerisLtd/trellis-backup-during-deploy/tree/0.1.1) (2018-05-21)
+[Full Changelog](https://github.com/ItinerisLtd/trellis-backup-during-deploy/compare/0.1.0...0.1.1)
+
 **Merged pull requests:**
 
+- Improve failed\_when rule for Wordpress Installed check [\#6](https://github.com/ItinerisLtd/trellis-backup-during-deploy/pull/6) ([TangRufus](https://github.com/TangRufus))
+- Update README.md [\#5](https://github.com/ItinerisLtd/trellis-backup-during-deploy/pull/5) ([E-VANCE](https://github.com/E-VANCE))
+- Readme: Fix typo [\#3](https://github.com/ItinerisLtd/trellis-backup-during-deploy/pull/3) ([TangRufus](https://github.com/TangRufus))
+
+## [0.1.0](https://github.com/ItinerisLtd/trellis-backup-during-deploy/tree/0.1.0) (2018-04-06)
+**Merged pull requests:**
+
+- Version bump 0.1.0 [\#2](https://github.com/ItinerisLtd/trellis-backup-during-deploy/pull/2) ([TangRufus](https://github.com/TangRufus))
 - Create LICENSE [\#1](https://github.com/ItinerisLtd/trellis-backup-during-deploy/pull/1) ([TangRufus](https://github.com/TangRufus))
 
 
