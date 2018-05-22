@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.1.2](https://github.com/ItinerisLtd/trellis-backup-during-deploy/tree/0.1.2) (2018-05-22)
+[Full Changelog](https://github.com/ItinerisLtd/trellis-backup-during-deploy/compare/0.1.1...0.1.2)
+
+**Merged pull requests:**
+
+- Fix `'wp\_installed' is undefined` [\#8](https://github.com/ItinerisLtd/trellis-backup-during-deploy/pull/8) ([TangRufus](https://github.com/TangRufus))
+
 ## [0.1.1](https://github.com/ItinerisLtd/trellis-backup-during-deploy/tree/0.1.1) (2018-05-21)
 [Full Changelog](https://github.com/ItinerisLtd/trellis-backup-during-deploy/compare/0.1.0...0.1.1)
 
