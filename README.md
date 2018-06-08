@@ -31,7 +31,7 @@ Add this role to `requirements.yml`:
 
 ```yaml
 # requirements.yml
-- src: git+https://github.com/ItinerisLtd/trellis-backup-during-deploy.git
+- src: https://github.com/ItinerisLtd/trellis-backup-during-deploy
   version: 0.1.2 # Check for latest version!
 ```
 
