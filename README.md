@@ -27,11 +27,12 @@ Backup WordPress database during [Trellis](https://github.com/roots/trellis) dep
 
 ## Installation
 
-Add this role to `requirements.yml`:
+Add this role to `galaxy.yml`:
 
 ```yaml
-# requirements.yml
-- src: https://github.com/ItinerisLtd/trellis-backup-during-deploy
+# galaxy.yml
+- name: trellis-backup-during-deploy
+  src: https://github.com/ItinerisLtd/trellis-backup-during-deploy
   version: 0.1.2 # Check for latest version!
 ```
 
