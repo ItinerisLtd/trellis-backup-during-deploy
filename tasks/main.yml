@@ -4,14 +4,39 @@
     path: "{{ deploy_helper.current_path }}"
   register: initialize_after_current_path
 
-- name: WordPress installed?
-  command: wp core is-installed --skip-plugins --skip-themes --require={{ deploy_helper.shared_path }}/tmp_multisite_constants.php
-  args:
-    chdir: "{{ deploy_helper.current_path }}"
-  register: initialize_after_wp_installed
-  when: initialize_after_current_path.stat.exists
-  changed_when: false
-  failed_when: initialize_after_wp_installed.stderr | default("") != "" or initialize_after_wp_installed.rc > 1
+- name: WordPress Installed (non-multisite)?
+  block:
+    - name: "Invoke 'wp core is-installed' command"
+      command: wp core is-installed --skip-plugins --skip-themes
+      args:
+        chdir: "{{ deploy_helper.current_path }}"
+      register: initialize_after_wp_installed_singlesite
+      when: initialize_after_current_path.stat.exists
+      changed_when: false
+      failed_when: initialize_after_wp_installed_singlesite.stderr | length > 0 or initialize_after_wp_installed_singlesite.rc > 1
+
+    - name: Set "WordPress installed?" result variable (from non-multisite)
+      set_fact:
+        initialize_after_wp_installed: "{{ initialize_after_wp_installed_singlesite }}"
+  when:
+    - not project.multisite.enabled | default(false)
+
+- name: WordPress Installed (multisite)?
+  block:
+    - name: "Invoke 'wp core is-installed' command"
+      command: wp core is-installed --skip-plugins --skip-themes --require={{ deploy_helper.shared_path }}/tmp_multisite_constants.php
+      args:
+        chdir: "{{ deploy_helper.current_path }}"
+      register: initialize_after_wp_installed_multisite
+      when: initialize_after_current_path.stat.exists
+      changed_when: false
+      failed_when: (initialize_after_wp_installed_multisite.stderr | length > 0 and initialize_after_wp_installed_multisite.stderr is not match(php_needle_warning)) or initialize_after_wp_installed_multisite.rc > 1
+
+    - name: Set "WordPress installed?" result variable (from multisite)
+      set_fact:
+        initialize_after_wp_installed: "{{ initialize_after_wp_installed_multisite }}"
+  when:
+    - project.multisite.enabled | default(false)
 
 - name: Backup WordPress database
   command: wp db export
