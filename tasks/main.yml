@@ -2,7 +2,7 @@
 - name: Web root directory exists?
   stat:
     path: "{{ deploy_helper.current_path }}"
-  register: initialize_after_current_path
+  register: trellis_backup_during_deploy_current_path
 
 - name: WordPress Installed (non-multisite)?
   block:
@@ -10,14 +10,14 @@
       command: wp core is-installed --skip-plugins --skip-themes
       args:
         chdir: "{{ deploy_helper.current_path }}"
-      register: initialize_after_wp_installed_singlesite
-      when: initialize_after_current_path.stat.exists
+      register: trellis_backup_during_deploy_wp_installed_singlesite
+      when: trellis_backup_during_deploy_current_path.stat.exists
       changed_when: false
-      failed_when: initialize_after_wp_installed_singlesite.stderr | length > 0 or initialize_after_wp_installed_singlesite.rc > 1
+      failed_when: trellis_backup_during_deploy_wp_installed_singlesite.stderr | length > 0 or trellis_backup_during_deploy_wp_installed_singlesite.rc > 1
 
     - name: Set "WordPress installed?" result variable (from non-multisite)
       set_fact:
-        initialize_after_wp_installed: "{{ initialize_after_wp_installed_singlesite }}"
+        trellis_backup_during_deploy_installed: "{{ trellis_backup_during_deploy_wp_installed_singlesite }}"
   when:
     - not project.multisite.enabled | default(false)
 
@@ -27,14 +27,14 @@
       command: wp core is-installed --skip-plugins --skip-themes --require={{ deploy_helper.shared_path }}/tmp_multisite_constants.php
       args:
         chdir: "{{ deploy_helper.current_path }}"
-      register: initialize_after_wp_installed_multisite
-      when: initialize_after_current_path.stat.exists
+      register: trellis_backup_during_deploy_wp_installed_multisite
+      when: trellis_backup_during_deploy_current_path.stat.exists
       changed_when: false
-      failed_when: (initialize_after_wp_installed_multisite.stderr | length > 0 and initialize_after_wp_installed_multisite.stderr is not match(php_needle_warning)) or initialize_after_wp_installed_multisite.rc > 1
+      failed_when: (trellis_backup_during_deploy_wp_installed_multisite.stderr | length > 0 and trellis_backup_during_deploy_wp_installed_multisite.stderr is not match(php_needle_warning)) or trellis_backup_during_deploy_wp_installed_multisite.rc > 1
 
     - name: Set "WordPress installed?" result variable (from multisite)
       set_fact:
-        initialize_after_wp_installed: "{{ initialize_after_wp_installed_multisite }}"
+        trellis_backup_during_deploy_installed: "{{ trellis_backup_during_deploy_wp_installed_multisite }}"
   when:
     - project.multisite.enabled | default(false)
 
@@ -44,5 +44,5 @@
     chdir: "{{ deploy_helper.current_path }}"
   changed_when: false
   when:
-    - initialize_after_current_path.stat.exists
-    - initialize_after_wp_installed.rc == 0
+    - trellis_backup_during_deploy_current_path.stat.exists
+    - trellis_backup_during_deploy_installed.rc == 0
